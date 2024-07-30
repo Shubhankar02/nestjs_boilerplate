@@ -1,13 +1,24 @@
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Res,
+} from '@nestjs/common';
 import { GoogleAuthService } from './google-auth.service';
 import { Response } from 'express';
 import { FacebookAuthService } from './facebook-auth.service';
+import { AuthService } from './auth.service';
+import { UseAuthStrategyInterceptor } from './decorators/auth-strategy.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly googleAuthService: GoogleAuthService,
     private readonly facebookAuthService: FacebookAuthService,
+    private authService: AuthService,
   ) {}
 
   @Get('google')
@@ -43,5 +54,44 @@ export class AuthController {
     // Here you can handle the user information (e.g., create or update a user in the database)
     // For simplicity, we'll just return the user info as a JSON response
     return res.json(userInfo);
+  }
+
+  @Post('local/register')
+  @UseAuthStrategyInterceptor('pbkdf2') // or 'bcrypt' as needed
+  // @AuthStrategy('bcrypt') // // Use BcryptStrategy for registration
+  async register(@Body() body: { username: string; password: string }) {
+    try {
+      console.log('body', body);
+      const salt = this.authService.createSalt();
+      const hashedPassword = this.authService.hashPassword(body.password, salt);
+      // Save the username, salt, and hashedPassword to the database (implementation depends on your database setup)
+      console.log('hashedPassword', hashedPassword);
+      return { message: 'User registered successfully' };
+    } catch (err) {
+      console.log('error', err);
+    }
+  }
+
+  @Post('local/login')
+  @UseAuthStrategyInterceptor('pbkdf2') // or 'bcrypt' as needed
+  async login(@Body() body: { username: string; password: string }) {
+    // Retrieve the user record from the database using the username (implementation depends on your database setup)
+    const user = {
+      salt: 'user-salt-from-db',
+      password: 'hashed-password-from-db',
+    }; // Example user data
+    if (!user) {
+      throw new BadRequestException('Invalid credentials');
+    }
+
+    const isPasswordValid = this.authService.verifyPassword(
+      body.password,
+      user.salt,
+      user.password,
+    );
+    if (!isPasswordValid) {
+      throw new BadRequestException('Invalid credentials');
+    }
+    return { message: 'Login successful' };
   }
 }
