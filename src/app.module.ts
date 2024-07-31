@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from './logger/logger.module';
 import { ExamplesModule } from './examples/examples.module';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ExamplesModule } from './examples/examples.module';
     ConfigModule.forRoot(),
     AuthModule,
     ExamplesModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -26,13 +26,16 @@
     "@nestjs/platform-express": "^10.0.0",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
+    "csv-parser": "^3.0.0",
     "google-auth-library": "^9.11.0",
+    "json2csv": "^6.0.0-alpha.2",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20",
     "winston": "^3.13.1",
     "winston-logstash-transport": "^2.0.0",
-    "winston-mongodb": "^5.1.1"
+    "winston-mongodb": "^5.1.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
