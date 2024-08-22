@@ -5,6 +5,7 @@ import { FileTransformerFactory } from '../file/factories/file-transformer-facto
 import { CustomFileReaderService } from '../file/services/custom-file-reader.service';
 import { EmailServiceInterface } from '../email/interfaces/email-service.interface';
 import { PaymentServiceInterface } from '../payment-service/interfaces/payment-service.interface';
+import { CRMServiceInterface } from '../crm/interfaces/crm-service.interface';
 
 @Injectable()
 export class ExamplesService {
@@ -17,6 +18,7 @@ export class ExamplesService {
     private readonly emailService: EmailServiceInterface,
     @Inject('PaymentService')
     private readonly paymentService: PaymentServiceInterface,
+    @Inject('CRMService') private readonly crmService: CRMServiceInterface,
   ) {}
 
   async exampleLogs() {

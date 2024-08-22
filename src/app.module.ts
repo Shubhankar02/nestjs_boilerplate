@@ -11,6 +11,7 @@ import { PaymentServiceModule } from './payment-service/payment-service.module';
 import { UploadModule } from './upload/upload.module';
 import { UploadService } from './upload/upload.service';
 import { MulterModule } from '@nestjs/platform-express';
+import { CrmModule } from './crm/crm.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { MulterModule } from '@nestjs/platform-express';
     EmailModule,
     PaymentServiceModule,
     UploadModule,
+    CrmModule,
   ],
   controllers: [AppController],
   providers: [AppService],
