@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { FileReaderInterface } from '../interfaces/file-reader.interface';
-import { JsonFileReaderService } from './json-file-reader.service';
-import { CsvFileReaderService } from './csv-file-reader.service';
-import { ExcelFileReaderService } from './excel-file-reader.service';
+import { JsonFileReaderService } from '../services/json-file-reader.service';
+import { CsvFileReaderService } from '../services/csv-file-reader.service';
+import { ExcelFileReaderService } from '../services/excel-file-reader.service';
 
 @Injectable()
 export class FileReaderFactory {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { FileReaderFactory } from './services/file-reader-factory.service';
-import { FileTransformerFactory } from './services/file-transformer-factory.service';
+import { FileReaderFactory } from './factories/file-reader-factory';
+import { FileTransformerFactory } from './factories/file-transformer-factory';
 import { JsonFileReaderService } from './services/json-file-reader.service';
 import { CsvFileReaderService } from './services/csv-file-reader.service';
 import { ExcelFileReaderService } from './services/excel-file-reader.service';

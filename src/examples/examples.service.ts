@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { LoggerService } from '../logger/services/logger.service';
-import { FileReaderFactory } from '../file/services/file-reader-factory.service';
-import { FileTransformerFactory } from '../file/services/file-transformer-factory.service';
+import { FileReaderFactory } from '../file/factories/file-reader-factory';
+import { FileTransformerFactory } from '../file/factories/file-transformer-factory';
 import { CustomFileReaderService } from '../file/services/custom-file-reader.service';
+import { EmailServiceInterface } from '../email/interfaces/email-service.interface';
+import { PaymentServiceInterface } from '../payment-service/interfaces/payment-service.interface';
 
 @Injectable()
 export class ExamplesService {
@@ -11,6 +13,10 @@ export class ExamplesService {
     private fileReaderFactory: FileReaderFactory,
     private fileTransformerFactory: FileTransformerFactory,
     private customFileReader: CustomFileReaderService,
+    @Inject('EmailService')
+    private readonly emailService: EmailServiceInterface,
+    @Inject('PaymentService')
+    private readonly paymentService: PaymentServiceInterface,
   ) {}
 
   async exampleLogs() {
@@ -31,5 +37,25 @@ export class ExamplesService {
     const fileTransformer =
       this.fileTransformerFactory.getFileTransformer(transformerType);
     return fileTransformer.transform(fileData);
+  }
+
+  async sendEmail() {
+    await this.emailService.sendEmail({
+      to: 'example@example.com',
+      subject: 'Test',
+      body: 'Hello!',
+    });
+  }
+
+  async processPayment() {
+    return await this.paymentService.initializePayment(
+      1000,
+      'USD',
+      'Payment Description',
+    );
+  }
+
+  async verifyPayment(paymentId: string) {
+    return await this.paymentService.verifyPayment(paymentId);
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable, Inject, Optional } from '@nestjs/common';
 import { FileTransformerInterface } from '../interfaces/file-transformer.interface';
-import { JsonToCsvTransformerService } from './json-to-csv-transformer.service';
-import { CsvToJsonTransformerService } from './csv-to-json-transformer.service';
+import { JsonToCsvTransformerService } from '../services/json-to-csv-transformer.service';
+import { CsvToJsonTransformerService } from '../services/csv-to-json-transformer.service';
 
 @Injectable()
 export class FileTransformerFactory {

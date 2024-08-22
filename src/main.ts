@@ -10,6 +10,11 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+
+  // Register the email service globally
+  // const emailServiceFactory = app.get(EmailServiceFactory);
+  // emailServiceFactory.registerService('sendgrid', new SendGridEmailService());
+
   await app.listen(3000);
 }
 
