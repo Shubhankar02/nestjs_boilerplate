@@ -14,7 +14,7 @@ export class EmailModule {
     serviceType:
       | 'sendgrid'
       | 'mailgun'
-      | 'ses'
+      | 'aws-ses'
       | 'postmark'
       | 'sendinblue'
       | 'sparkpost'
@@ -29,7 +29,7 @@ export class EmailModule {
       case 'mailgun':
         service = MailgunEmailService;
         break;
-      case 'ses':
+      case 'aws-ses':
         service = AmazonSESEmailService;
         break;
       case 'postmark':

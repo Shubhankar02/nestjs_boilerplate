@@ -1,5 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { CRMServiceFactory } from './factories/crm-service.factory';
+import { HubSpotCRMService } from './services/hubspot-crm.service';
 
 @Module({})
 export class CrmModule {
@@ -17,7 +18,7 @@ export class CrmModule {
     }
 
     return {
-      module: CRMModule,
+      module: CrmModule,
       providers: [
         CRMServiceFactory,
         service,

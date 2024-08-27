@@ -21,7 +21,7 @@ export class UploadService implements MulterOptionsFactory {
     };
   }
 
-  handleUploadedFile(file: Express.Multer.File): string {
+  handleUploadedFile(file): string {
     return `File uploaded successfully: ${file.filename}`;
   }
 }

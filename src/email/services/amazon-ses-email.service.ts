@@ -7,12 +7,18 @@ export class AmazonSESEmailService implements EmailServiceInterface {
   private sesClient: SESClient;
 
   constructor() {
-    this.sesClient = new SESClient({ region: 'your-region' });
+    this.sesClient = new SESClient({
+      region: process.env.AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      },
+    });
   }
 
   async sendEmail(mailOptions: { to: string; subject: string; body: string }) {
     const params = {
-      Source: 'your-email@your-domain.com',
+      Source: 'your-email@domain-name.com', // Put your own domain email address
       Destination: {
         ToAddresses: [mailOptions.to],
       },
