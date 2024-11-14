@@ -61,11 +61,9 @@ export class AuthController {
   // @AuthStrategy('bcrypt') // // Use BcryptStrategy for registration
   async register(@Body() body: { username: string; password: string }) {
     try {
-      console.log('body', body);
       const salt = this.authService.createSalt();
       const hashedPassword = this.authService.hashPassword(body.password, salt);
       // Save the username, salt, and hashedPassword to the database (implementation depends on your database setup)
-      console.log('hashedPassword', hashedPassword);
       return { message: 'User registered successfully' };
     } catch (err) {
       console.log('error', err);

@@ -10,7 +10,7 @@ import { PaymentServiceModule } from '../payment-service/payment-service.module'
   imports: [
     FileModule,
     EmailModule.forRoot('mailgun'),
-    PaymentServiceModule.forRoot('stripe'),
+    PaymentServiceModule.forRoot('razorpay'),
   ],
   providers: [ExamplesService, CustomFileReaderService],
   controllers: [ExamplesController],

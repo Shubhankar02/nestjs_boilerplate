@@ -5,6 +5,7 @@ import { FileTransformerFactory } from '../file/factories/file-transformer-facto
 import { CustomFileReaderService } from '../file/services/custom-file-reader.service';
 import { EmailServiceInterface } from '../email/interfaces/email-service.interface';
 import { PaymentServiceInterface } from '../payment-service/interfaces/payment-service.interface';
+import { CsvFileReaderService } from '../file/services/csv-file-reader.service';
 
 @Injectable()
 export class ExamplesService {
@@ -13,6 +14,7 @@ export class ExamplesService {
     private fileReaderFactory: FileReaderFactory,
     private fileTransformerFactory: FileTransformerFactory,
     private customFileReader: CustomFileReaderService,
+    private csvFileReader: CsvFileReaderService,
     @Inject('EmailService')
     private readonly emailService: EmailServiceInterface,
     @Inject('PaymentService')
@@ -31,6 +33,7 @@ export class ExamplesService {
   ) {
     // Register a custom reader if needed, or rely on the defaults
     // this.fileReaderFactory.registerReader('custom', this.customFileReader);
+    // this.fileReaderFactory.registerReader('csv', this.csvFileReader);
     const fileData = await this.fileReaderFactory
       .getFileReader(fileType)
       .read(filePath);
